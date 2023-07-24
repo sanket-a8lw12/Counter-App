@@ -1,16 +1,18 @@
 body{
   display: flex;
   justify-content: center;
-  padding-top: 5em;
+  padding: 3em;
 }
 
 .container{
-  border: 2px solid black;
-  width: 17em;
+  border: 8px solid #7FD8E6;
+  border-radius: 1em;
+  width: 45em;
   display: flex;
   flex-direction: column;
   gap: 2em;
   padding: 2em;
+  background-color: #DDF2F5;
 }
 
 
@@ -40,6 +42,7 @@ body{
   color: black;
   background-color: grey;
   text-align: center;
+  border: none;
 }
 
 .data{
@@ -54,4 +57,39 @@ span{
   background-color: grey;
   color: white;
   text-align: center;
+  padding: 0.1em;
+}
+
+.activeZero{
+  background-color: #FFC107;
+  color: black;
+}
+
+
+.deactiveZero{
+  background-color: blue;
+  
+}
+
+.decrementBtn{
+  background-color: #5CBECD;
+}
+
+.deleteBtn{
+  background-color: #DC3545;
+}
+
+.resetBtn{
+  background-color: #4da5fc;
+}
+
+.refreshBtn{
+  background-color: #28A745;
+}
+
+#cart{
+  background-color: #17A2B8;
+  border-radius: 2em;
+  height: 1.5em;
+  padding-top: 0;
 }
