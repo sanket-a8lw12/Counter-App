@@ -10,13 +10,12 @@ function App() {
     { id: 4, count: "Zero" }
   ]
 
-  // ...data bcoz if if delete the item it should not delete from main array
+  const [arrElement, setArrElement] = useState(dataSet);
 
-  const [arrElement, setArrElement] = useState([...dataSet]) 
   const [cartCount, setCartCount] = useState(0);
 
-  function increaseCartCount(){
-    let countCart = arrElement.filter((item)=>{
+  function increaseCartCount() {
+    let countCart = arrElement.filter((item) => {
       return item.count > 0
     })
     setCartCount(countCart.length);
@@ -24,10 +23,10 @@ function App() {
 
 
 
-  function increment(event){
-    setArrElement(arrElement.map((value)=>{
-      if(value.id === event.id){
-        if(value.count === "Zero"){
+  function increment(event) {
+    setArrElement(arrElement.map((value) => {
+      if (value.id === event.id) {
+        if (value.count === "Zero") {
           value.count = 0;
         }
         value.count += 1;
@@ -37,13 +36,13 @@ function App() {
     increaseCartCount();
   }
 
-  function decrement(event){
-    setArrElement(arrElement.map((value)=>{
-      if(value.id === event.id){
-        if(value.count !== "Zero"){
+  function decrement(event) {
+    setArrElement(arrElement.map((value) => {
+      if (value.id === event.id) {
+        if (value.count !== "Zero") {
           value.count -= 1;
         }
-        if(value.count === 0){
+        if (value.count === 0) {
           value.count = "Zero";
           setCartCount(cartCount - 1);
         }
@@ -53,55 +52,65 @@ function App() {
   }
 
 
-  function deleteItem(event){
-    setArrElement(arrElement.filter((value)=>{
-        return value.id !== event.id;
+  function deleteItem(event) {
+    setArrElement(arrElement.filter((value) => {
+      return value.id !== event.id;
     }))
-    setCartCount(cartCount - 1); // if deleted then cart count should also decrease
+    if (cartCount > 0) { // if deleted then cart count should also decrease
+      setCartCount(cartCount - 1);
+    }
   }
 
-  function refresh(){  // took arrElement as it has current data taking dataSet will refresh everything
-    let updatedDataSet = arrElement.map((value)=>{
+  function refresh() {  // took arrElement as it has current data taking dataSet will refresh everything
+    let updatedDataSet = arrElement.map((value) => {
       value.count = "Zero";
       return value;
     })
     setArrElement(updatedDataSet);
+    setCartCount(0);
   }
+
+  function reset() {
+    if (arrElement.length === 0) {
+      return setArrElement(dataSet);
+    }
+  }
+
+
 
   return (
     <>
       <div className='container'>
         <div className='header'>
           <i className="fa-solid fa-cart-shopping"></i>
-          <span>{cartCount}</span>
+          <span id='cart'>{cartCount}</span>
           <div>Items</div>
         </div>
         <div className='refreshButton'>
-        <button type="button" onClick={() => refresh() } className="buttonSize">
-        <i className="fa-solid fa-arrows-rotate" style={{color: "#1bb61e"}}></i>
-                </button>
-                <button type="button" onClick={() => decrement} className="buttonSize">
-                <i class="fa-solid fa-recycle" style={{color: "#4dd1cf"}}></i>
-                </button>
-        
-        
-        </div>
+          <button type="button" onClick={() => refresh()} className="buttonSize refreshBtn">
+            <i className="fa-solid fa-arrows-rotate" style={{ color: "white" }}></i>
+          </button>
+          <button type="button" onClick={() => reset()} className="buttonSize resetBtn">
+            <i class="fa-solid fa-recycle" style={{ color: "white" }}></i>
+          </button>
 
+
+        </div>
+        
         <div className='data'>
-          {arrElement.map((item)=>{
-            return(
+          {arrElement.map((item) => {
+            return (
               <div id='card'>
-                <span>{item.count}</span>
-                 
-                 
+               
+                <span class={(typeof(item.count) === "string" && "activeZero") || "deactiveZero"}>{item.count}</span>
                 <button type="button" onClick={() => increment(item)} className="buttonSize">
-                <i class="fa-solid fa-circle-plus" style={{color: "#fbfcfe"}}></i>
+                  <i class="fa-solid fa-circle-plus" style={{ color: "#fbfcfe" }}></i>
                 </button>
-                <button type="button" onClick={() => decrement(item)} className="buttonSize">
-                <i class="fa-solid fa-circle-minus" style={{color: "#f5f5f5"}}></i>
+                <button type="button" onClick={() => decrement(item)} className="buttonSize decrementBtn">
+                  <i class="fa-solid fa-circle-minus" style={{ color: "white" }}></i>
                 </button>
-                <button type="button" onClick={() => deleteItem(item)} className="buttonSize">
-                <i class="fa-solid fa-trash-can" style={{color: "#ebe6e6"}}></i>
+                <button type="button" onClick={() => deleteItem(item)} className="buttonSize deleteBtn">
+                  <i class="fa-solid fa-trash-can" style={{ color: "#ebe6e6" }}></i>
                 </button>
               </div>
             )
@@ -109,7 +118,7 @@ function App() {
         </div>
 
 
-        
+
 
 
       </div>
