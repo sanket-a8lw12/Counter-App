@@ -1,0 +1,57 @@
+body{
+  display: flex;
+  justify-content: center;
+  padding-top: 5em;
+}
+
+.container{
+  border: 2px solid black;
+  width: 17em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 2em;
+}
+
+
+#card{
+  /* border: 2px solid blue; */
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+
+}
+
+.refreshButton{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.buttonSize{
+  width: 2em;
+  height: 2em;
+  color: black;
+  background-color: grey;
+  text-align: center;
+}
+
+.data{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+span{
+  height: 2em;
+  width: 3em;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
